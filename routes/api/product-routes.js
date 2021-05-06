@@ -39,7 +39,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -48,8 +48,13 @@ router.post('/', async (req, res) => {
       tagIds: [1, 2, 3, 4]
     }
   */
- Product.create(req.body)
-    .then((product) => {
+ Product.create({
+  product_name: req.body.product_name,
+  price: req.body.price,
+  stock: req.body.stock,
+  tagIds: req.body.tagIds
+ })
+ .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -83,10 +88,8 @@ router.put('/:id', (req, res) => {
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
     .then((productTags) => {
-      console.log(productTags)
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
-      console.log(productTagIds)
       // create filtered list of new tag_ids
       const newProductTags = req.body.tagIds
         .filter((tag_id) => !productTagIds.includes(tag_id))
@@ -124,7 +127,7 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!product) {
-      res.status(404).json({ message: 'No product was deleted'});
+      res.status(404).json({ message: 'No product was found with that id'});
       return;
     }
 
