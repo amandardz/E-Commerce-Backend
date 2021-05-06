@@ -8,6 +8,7 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const tagsData = await Tag.findAll({
+      attributes: ['id', 'tag_name'],
       include: [{model: Product}]
     });
     res.status(200).json(tagsData)
@@ -38,10 +39,24 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
+  Tag.create({
+    tag_name: req.body.tag_name
+  }) 
+  .then(tag => res.json(tag))
+  .catch((err) => {
+    console.log(err);
+    res.status(400).json(err);
+  });
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
+  Tag.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  }) 
+  .then(tag => res.json(tag))
 });
 
 router.delete('/:id', async (req, res) => {
@@ -54,7 +69,7 @@ router.delete('/:id', async (req, res) => {
     });
 
     if (!tag){
-      res.status(404).json({ message: 'No tag was deleted'})
+      res.status(404).json({ message: 'No tag found with this id'})
       return;
     }
 
