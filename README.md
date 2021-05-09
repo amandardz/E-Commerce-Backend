@@ -27,7 +27,7 @@ In this repository, the developer will create a backend for an e-commerce websit
 ## Usage
 To begin, as a developer, think about how the user will interact with the E-Commerce Backend to breakdown the steps to know which package dependencies to install and write the database and code necessary for it to perform its function. Below are the steps on how the user will interact with the E-Commerce Backend:
 1. User will enter credentials to .env file to be able to create/access database. *Be sure to erase EXAMPLE from the file name to be able to rename the file .env for it to function.*
-2. User will open the terminal and type *mysql -u root -p* to access sql and create the database. Once completed, user will exit sql in terminal by entering *\q*.
+2. User will open the terminal and type *mysql -u root -p* to access sql and create the database. Once completed, user will exit sql in terminal by entering * \q *.
 3. User will type *npm run seed* in terminal to seed the data. *If unable to seed, be sure to be in the root folder in the terminal*
 4. User will type *npm run watch* to run server.
 5. User will open Insomnia. 
