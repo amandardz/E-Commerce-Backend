@@ -20,7 +20,7 @@ In this repository, the developer will create a back end for an e-commerce websi
 ## Usage
 Click the image below to watch a video demonstration:
 
-[![Video Demonstration](https://img.youtube.com/vi/ /0.jpg)](https://youtu.be/)
+[![Video Demonstration](https://img.youtube.com/vi/KPVR40hKZPs/0.jpg)](https://youtu.be/KPVR40hKZPs)
 ## License
 MIT License
 
